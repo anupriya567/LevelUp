@@ -15,8 +15,8 @@ def index(request):
 
 
 def result(request,myid):
-    objects = Content.objects.filter(bp_id = myid)
-    print(objects)
+    cobjects = Content.objects.filter(bp_id = myid)
+    print(cobjects)
     yobjects = Youtube.objects.filter(bp_id = myid)
     bpobjects = Blogpost.objects.all()
     bpobject = Blogpost.objects.filter(post_id = myid).first()
@@ -32,7 +32,7 @@ def result(request,myid):
         else:
             replyDict[reply.parent.sno] = [reply].append(reply)
     
-    params = {'objects':objects, 'bpobject':bpobject,'bpobjects':bpobjects,'yobjects':yobjects,'allComments':allComments, 'replyDict':replyDict} 
+    params = {'cobjects':cobjects, 'bpobject':bpobject,'bpobjects':bpobjects,'yobjects':yobjects,'allComments':allComments, 'replyDict':replyDict} 
     return render (request,'result.html',params)
 
 
