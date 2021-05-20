@@ -1,0 +1,66 @@
+
+a.links
+{
+   text-decoration:none ;   
+   font-size: 20px;
+   color: #0b61a5;
+}
+li a{
+    text-decoration:none ;    
+}
+body
+{
+    background-color:rgb(255, 255, 255);
+}
+
+.col-lg-6.center {
+    position: relative;
+   
+    left: 409px;
+    top: 73px;
+}
+
+#foo
+{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    width: 100%;
+    height:52px;
+    color: white;
+    text-align: center;
+}
+
+    .commcont
+    {
+      display: flex; 
+    }
+    .commcont img
+    {
+      width: 42px;
+      height: 42px;
+      
+    }    
+    img#yimg
+    {
+        width: 42px;
+        height: 42px; 
+    }
+    div.fbox
+    {
+        display: flex;
+    }
+    
+    h3#center 
+    {
+       position: relative;
+       left: 89px;
+       color: #4caf50;
+       top: 9px;
+       font-weight: bolder;
+       letter-spacing: 2px;
+    }
+
+    
+   
+    

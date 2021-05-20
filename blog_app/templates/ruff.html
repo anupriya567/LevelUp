@@ -1,0 +1,193 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% load extras %}
+{% load humanize %}
+{% block title %}result {% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+  <div class="row my-4">
+    <div class="col-md-8">
+      <article class="blog-post">
+        <h2 class="blog-post-title ">{{bpobject.tilte}}</h2>
+        <p>{{bpobject.desc}}</p>
+        <p class="blog-post-meta">Modified On : {{bpobject.pub_date}}
+          <br>{{bpobject.views}} views
+        </p>
+
+        <hr>
+        <ul>
+          {% for obj in objects %}
+          <li><a class="links text-dark" href={{obj.link}}><b>{{obj.name}}</b></a></li>
+          <p>{{obj.desc}}</p>
+          {% endfor %}
+        </ul>
+      </article><!-- /.blog-post -->
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        <div class="p-4 mb-3 bg-light rounded">
+          <h4 class="fst-italic">About</h4>
+          <p class="mb-0">If you are despirate to learn new technologies. But don't know where to get started. LevelUp,
+            this initiative is helping u guys to get resources for every technology that you want to master from begin
+            to
+            advance level. We provide you with the links of best platforms to learn, practice and explore the techs.</p>
+        </div>
+
+        <div class="p-4">
+          <h4 class="fst-italic">Check these out</h4>
+          <ol class="list-unstyled mb-0">
+            {% for bpobj in bpobjects %}
+            <li><a href="{% url 'result' bpobj.post_id  %}">{{bpobj.tilte}}</a></li>
+            {% endfor %}
+          </ol>
+        </div>
+
+        <div class="p-4">
+          <h4 class="fst-italic">Elsewhere</h4>
+          <ol class="list-unstyled">
+            <li><a href="https://www.instagram.com/anupriya_sharma567/">Instagram</a></li>
+            <li><a href="https://github.com/anupriya567">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/anupriya-sharma-741a15190/">LinkedIn</a></li>
+
+          </ol>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+</div>
+<!-- youtube-->
+<div class="container ">
+  <div class="fbox">
+    <img src="{% static 'images\youtube.png'%}" alt="">
+    <h1>YouTube Channels that are going to help you a lot</h1>
+  </div>
+
+  <!-- Three columns of text below the carousel -->
+  <div class="row">
+    {% for yobj in yobjects %}
+    <div class="col-lg-4">
+      <img src="" alt="">
+      <img src="{% static 'images\laptop-screen.png' %}" class="bd-placeholder-img rounded-circle my-4" width="150"
+        height="140" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <title>Placeholder</title>
+      <rect width="100%" height="100%" fill="#777"></rect><text x="50%" y="50%" fill="#777" dy=".3em"></text>
+      <h2>{{yobj.name}}</h2>
+      <p>{{yobj.desc}}</p>
+      <p><a class="btn btn-secondary" href="{{yobj.link}}">View details »</a></p>
+    </div><!-- /.col-lg-4 -->
+
+    {% if forloop.counter|divisibleby:2 %}
+  </div>
+  <div class="row">
+    {% endif %}
+    {% endfor %}
+
+  </div>
+</div>
+<br>
+<!-- Comments-->
+<div class="container" id="com">
+  <h2>Comments ({{allComments|length}})</h2>
+  <hr>
+  {% for message in messages %}
+  <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
+    <strong>Message: </strong> {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+
+  <form action="/postcomment/" method="POST">
+    {% csrf_token %}
+    {% if user.is_authenticated %}
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">Post a Comment</label>
+      <input type="hidden" name="postsno" id="postsno" value="{{bpobject.post_id}}">
+      <input type="hidden" name="parentsno" value="">
+      {% if allComments|length == 0 %}
+      <input type="text" class="form-control" id="comm" name="comm" placeholder="Be the first to comment"
+        aria-describedby="emailHelp" required>
+      {% else %}
+      <input type="text" class="form-control" id="comm" name="comm" placeholder="Write your comments here"
+        aria-describedby="emailHelp" required>
+      {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+    {% else %}
+    <button type="submit" class="btn btn-primary" disabled>Login to Post Comment</button>
+    {% endif %}
+  </form>
+
+  {% for c in allComments %}
+  <div class="quescont my-4">
+    <div> <img src="{% static 'images\man-user.png'%}" alt=""></div>
+    <div>
+      <p class="font-weight-bold my-0"><b>{{c.user.username}}</b> at {{c.timestamp | naturaltime}}</p>
+      <p>{{c.comment}}</p>
+
+
+      <div class="reply mx-0">
+        {% if user.is_authenticated %}
+        <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#replyBox{{c.sno}}"
+          aria-controls="replyBox{{c.sno}}">
+          Reply
+        </button>
+        <div class="collapse" id="replyBox{{c.sno}}">
+          <div class="card card-body my-2">
+            <form action="/postComment/" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="comment">Post a reply </label>
+                <input type="text" class="form-control" name="comment" placeholder="Enter comment here">
+                <input type="hidden" name="parentsno" value="{{c.sno}}">
+                <input type="hidden" name="postsno" value="{{bpobject.post_id}}">
+              </div>
+
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+        {% else %}
+        <button class="btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#replyBox{{c.sno}}"
+          aria-expanded="false" aria-controls="replyBox{{c.sno}}">
+          Login to reply
+        </button>
+        {% endif %}
+        <div class="replies my-2 ">
+          {% for reply in replyDict|get_val:c.sno %}
+          <div class="row my-2">
+            <div class="col-md-1 ">
+              <img class="rounded mx-auto d-block w-75 my-2 border border-dark p-2" src="/static/image/man-user.png"
+                alt="user">
+            </div>
+            <div class="col-md-11">
+              <div class="col-md-11 ">
+                <b> {{reply.user.username}} </b> <span class="badge badge-secondary ">{{reply.timestamp|
+                  naturaltime}}</span>
+                <div>{{reply.comment}}</div>
+              </div>
+              <br>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+{% endblock %}
+{% block script %}
+<script src="{% static 'js/javas.js' %}"></script>
+{% endblock %}
+
+{% block footer %}foo{% endblock %}
