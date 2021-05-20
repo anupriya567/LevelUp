@@ -35,10 +35,7 @@ def result(request,myid):
     params = {'objects':objects, 'bpobject':bpobject,'bpobjects':bpobjects,'yobjects':yobjects,'allComments':allComments, 'replyDict':replyDict} 
     return render (request,'result.html',params)
 
-def basic(request,myid):
-    objects = Blogpost.objects.all()
-    params = {'objects':objects}
-    return render (request,'basic.html',params)
+
 
 def about(request):
     return render (request,'about.html')
