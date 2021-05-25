@@ -36,7 +36,17 @@
           <li class="nav-item ">
             <a class="nav-link {% block aboutactive %}{% endblock %}" href="{% url 'about'%}">About Us</a>
           </li>
-          
+          <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"  data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Skills
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for obj in objects%}  
+              <li><a class="dropdown-item" href="{% url 'result' obj.post_id  %}">{{obj.tilte}}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
          <li class="nav-item">
             <a class="nav-link {% block contributeactive %}{% endblock %} " href="{% url 'contribute'%}">Contribute</a>
           </li>

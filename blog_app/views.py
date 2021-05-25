@@ -13,6 +13,10 @@ def index(request):
     params = {'objects':objects}
     return render (request,'index.html',params)
 
+def basic(request,myid):
+    objects = Blogpost.objects.all()
+    params = {'objects':objects}
+    return render (request,'basic.html',params)
 
 def result(request,myid):
     cobjects = Content.objects.filter(bp_id = myid)

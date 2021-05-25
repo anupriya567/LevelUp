@@ -23,7 +23,6 @@ admin.site.site_header = "LevelUp Admin"
 admin.site.site_title = "LevelUp Admin Panel"
 admin.site.index_title = "Welcome to LevelUp Admin Panel"
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('blog_app.urls')),
