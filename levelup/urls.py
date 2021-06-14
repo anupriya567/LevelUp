@@ -26,4 +26,5 @@ admin.site.index_title = "Welcome to LevelUp Admin Panel"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('blog_app.urls')),
+    path('accounts/', include('allauth.urls')),
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

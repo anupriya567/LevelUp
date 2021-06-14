@@ -17,7 +17,9 @@ body
     position: relative;
    
     left: 409px;
-    top: 73px;
+    top: 55px;
+    align-items: center;
+    justify-content: center;
 }
 
 #foo
@@ -49,18 +51,48 @@ body
     div.fbox
     {
         display: flex;
+        padding-bottom: 18px;
     }
-    
-    h3#center 
-    {
-       position: relative;
-       left: 89px;
-       color: #4caf50;
-       top: 9px;
-       font-weight: bolder;
-       letter-spacing: 2px;
-    }
-
     
    
+    /* about */
+    .rabout {
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        top: 85px;
+    }
     
+    #centerr 
+    {
+       position: relative;
+       left: 55px;
+       color: #4caf50;
+       top: 9px;
+       padding-top: 4px;
+       letter-spacing: 2px;
+    } 
+    p{
+    font-family: "Open Sans";
+    color: rgb(44, 43, 43);
+    font-weight: 500;
+    font-size: 20px;
+    }
+    /* basic name */
+   #ename {
+       color: green;
+       font-weight: bold;
+       font-family: 'Roboto', serif;
+       font-size:25px;
+   }
+
+   #sname
+   {
+     letter-spacing: 0.2px;
+     font-size:25px;
+     font-family: 'Roboto', serif;
+   }
+
+   .bg-dark {
+    background-color: #0a141f!important;
+}

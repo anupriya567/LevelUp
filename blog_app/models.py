@@ -15,10 +15,10 @@ class Blogpost(models.Model):
 
 class Content(models.Model):
     post_id = models.AutoField(primary_key= True)
-    bp_id = models.IntegerField(default = 0)
+    bp_id = models.ForeignKey(Blogpost,on_delete = models.CASCADE)
     name = models.CharField(max_length=500, default="")
-    desc = models.CharField(max_length=5000, default="")
-    link = models.CharField(max_length=500, default="")
+    desc = models.CharField(max_length=5000, blank=True)
+    link = models.URLField(default =True)
     
     def __str__(self):
         return self.name
@@ -36,10 +36,9 @@ class Contact(models.Model):
 
 class Youtube(models.Model):
     id = models.AutoField(primary_key= True)
-    bp_id = models.IntegerField(default = 0)
+    bp_id = models.ForeignKey(Blogpost,on_delete = models.CASCADE)
     name = models.CharField(max_length=500, default="")
-    desc = models.CharField(max_length=5000, default="")
-    link = models.CharField(max_length=500, default="")
+    link = models.URLField(default=True)
     
     def __str__(self):
         return self.name
