@@ -10,6 +10,7 @@ from blog_app.templatetags import extras
 
 def index(request):
     objects = Blogpost.objects.all()
+    print(objects)
     params = {'objects':objects}
     return render (request,'index.html',params)
 
@@ -20,7 +21,7 @@ def basic(request,myid):
 
 def result(request,myid):
     cobjects = Content.objects.filter(bp_id = myid)
-    print(cobjects)
+    # print(cobjects)
     yobjects = Youtube.objects.filter(bp_id = myid)
     bpobjects = Blogpost.objects.all()
     bpobject = Blogpost.objects.filter(post_id = myid).first()
@@ -74,12 +75,14 @@ def contact(request):
 def handlesignup(request):
     if request.method =="POST":
         # Get the post parameters
-        username = request.POST['name']
+        fname = request.POST['fname']
+        lname = request.POST['lname']
         email = request.POST['email']
         
         pass1 = request.POST['spassword1']
         pass2 = request.POST['spassword2']
         
+        username = fname+" "+lname
         error = False
         # check for errorneous input
         if len(username)<10:
@@ -119,7 +122,7 @@ def handlesignup(request):
 def handlelogin(request): 
     if request.method =="POST":
         # Get the post parameters
-        name = request.POST['lname']
+        name = request.POST['llname']
         pass1 = request.POST['lpassword1']
         user = authenticate(username = name, password = pass1)
         

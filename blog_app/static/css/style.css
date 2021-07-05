@@ -96,3 +96,11 @@ body
    .bg-dark {
     background-color: #0a141f!important;
 }
+
+@media only screen and (max-width: 600px) {
+    .aboutside {
+      visibility: hidden;
+    }
+  }
+
+

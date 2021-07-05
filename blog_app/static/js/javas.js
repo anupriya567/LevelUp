@@ -26,5 +26,8 @@
 // });
 
 
+const pa = document.getElementsByClassName("aboutside")[0]
 
-
+var child = pa.getElementsByClassName("aboutin")[0]
+var removed = pa.removeChild(child)
+pa.appendChild(removed)

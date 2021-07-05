@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import  settings
 from django.conf.urls.static import static
-
+from django.views.generic import TemplateView
 
 admin.site.site_header = "LevelUp Admin"
 admin.site.site_title = "LevelUp Admin Panel"
@@ -26,5 +26,9 @@ admin.site.index_title = "Welcome to LevelUp Admin Panel"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('blog_app.urls')),
-    path('accounts/', include('allauth.urls')),
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
+
+
+
+ # path('', TemplateView.as_view(template_name="social_app/index.html")), 
+ # path('accounts/', include('allauth.urls')),
